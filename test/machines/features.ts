@@ -1,5 +1,11 @@
-import { createMachine, action, immediate, invoke, guard, reduce, state, transition } from 'robot3';
+import { createMachine, immediate, invoke, guard, reduce, state, transition } from 'robot3';
 
+/**
+ * Machine with a graph of transitions
+ *
+ * inactive --(toggle)--> active
+ * active   --(toggle)--> inactive
+ */
 export const transitions = createMachine({
   inactive: state(
     transition('toggle', 'active')
@@ -9,6 +15,12 @@ export const transitions = createMachine({
   )
 });
 
+/**
+ * Machine with a final state
+ *
+ * pending --(done)--> finished
+ * finished  [final=true]
+ */
 export const finalState = createMachine({
   pending: state(
     transition('done', 'finished')
@@ -16,6 +28,20 @@ export const finalState = createMachine({
   finished: state()
 });
 
+/**
+ * Machine with guards
+ *
+ * chooseMove --(next)--|guard|--> healing
+ *            --(next)--> attacking
+ *
+ * attacking  --(next)--> enemyTurn
+ * healing    --(next)--> enemyTurn
+ *
+ * enemyTurn  --(takeAttack)--|guard|--> defeated
+ *            --(next)--> chooseMove
+ *
+ * defeated [final=true]
+ */
 export const guards = createMachine({
   chooseMove: state(
     transition('next', 'healing', guard(function amHurt(ctx) { return true })),
@@ -34,6 +60,15 @@ export const guards = createMachine({
   defeated: state()
 });
 
+/**
+ * Machine with reducers
+ *
+ * idle  --(login)--> idle [reduce]
+ *       --(password)--> idle [reduce]
+ *       --(submit) --> complete
+ *
+ * complete [final=true]
+ */
 export const reducers = createMachine({
   idle: state(
     transition('login', 'idle',
@@ -47,16 +82,16 @@ export const reducers = createMachine({
   complete: state()
 });
 
-
-export const actions = createMachine({
-  inactive: state(
-    transition('toggle', 'active', action(function () {}))
-  ),
-  active: state(
-    transition('toggle', 'inactive', action(function () {}))
-  )
-})
-
+/**
+ * Machine with immediates
+ *
+ * idle --(submit)-->validate
+ *
+ * validate >>--|guard|-->> submission
+ *          >>-->> idle
+ *
+ * submission [final]
+ */
 export const immediates = createMachine({
   idle: state(
     transition('submit', 'validate')
@@ -68,6 +103,17 @@ export const immediates = createMachine({
   submission: state()
 });
 
+/**
+ * Machine that invokes promises
+ *
+ * idle --(load)--> loading
+ *
+ * loading --> {loadingPromise} --(done)--> idle [reduce]
+ *                              --(error)--> error [reduce]
+ *         --(abort)--> idle
+ *
+ * error [final]
+ */
 export const invokePromises = createMachine({
   idle: state(
     transition('load', 'loading')
@@ -84,6 +130,21 @@ export const invokePromises = createMachine({
   error: state()
 })
 
+/**
+ * Machine that invokes other machines
+ *
+ * # Graph 1
+ *
+ * greenLight --(button)--> yellowLight
+ *
+ * yellowLight --{graph2} --(done)--> redLight
+ *             --(cancel)--> greenLight
+ *
+ * redLight --{redLightPromise} --(done)--> greenLight
+ *
+ * # Graph 2
+ * (etc)
+ */
 export const invokeMachines = createMachine({
   greenLight: state(
     transition('button', 'yellowLight')
