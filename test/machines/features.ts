@@ -1,4 +1,4 @@
-import { createMachine, immediate, invoke, guard, reduce, state, transition } from 'robot3';
+import { createMachine, immediate, invoke, guard, reduce, state, transition, action } from 'robot3';
 
 /**
  * Machine with a graph of transitions
@@ -102,6 +102,25 @@ export const immediates = createMachine({
   ),
   submission: state()
 });
+
+/**
+ * Machine with actions
+ *
+ * off --> on { On! }
+ * on --> off { Off! }
+ */
+export const actioned = createMachine({
+  off: state(
+    transition('switch', 'on',
+      action(() => console.log('On!'))
+    )
+  ),
+  on: state(
+    transition('switch', 'off',
+      action(() => console.log('Off!'))
+    )
+  )
+})
 
 /**
  * Machine that invokes promises

@@ -1,0 +1,19 @@
+{
+  "name": "robot3-viz",
+  "version": "1.0.0",
+  "description": "Visualise Robot3 finite state machines",
+  "main": "index.js",
+  "repository": "git@github.com:jbreckmckye/robot3-viz.git",
+  "author": "jbreckmckye",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest ."
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.5",
+    "robot3": "^0.2.21",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4"
+  }
+}
