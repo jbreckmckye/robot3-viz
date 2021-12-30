@@ -31,3 +31,16 @@ export type R3Dag = {
   nodes: R3Node[],
   edges: R3Edge[],
 }
+
+export type NodeMap = Record<string, StateNodes>
+
+export type StateNodes = {
+  root: R3Node,
+  immediatesNodes: TransitionNodes[],
+  transitionsNodes: Record<string, TransitionNodes[]>
+}
+
+export type TransitionNodes = {
+  guard?: R3Node,
+  reducer?: R3Node,
+}

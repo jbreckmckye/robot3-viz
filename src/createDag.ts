@@ -1,30 +1,14 @@
-import { inspect } from 'util'
+import { R3Immediate, R3Machine, R3State, R3Transition } from './types/robot3'
+import { NodeMap, R3Dag, R3Edge, R3EdgeKinds, R3Node, R3NodeID, StateNodes, TransitionNodes } from './types/dag'
+import { Guard, Reducer, State } from './nodes'
+import { mapRecord } from './util'
 
-import { Machine } from 'robot3'
-import { R3Immediate, R3Machine, R3State, R3Transition } from './types/robot3';
-import { R3Dag, R3Edge, R3EdgeKinds, R3Node, R3NodeID } from './types/dag';
-import { Guard, Reducer, State } from './nodes';
-
-type NodeMap = Record<string, StateNodes>
-
-type StateNodes = {
-  root: R3Node,
-  immediatesNodes: TransitionNodes[],
-  transitionsNodes: Record<string, TransitionNodes[]>
-}
-
-type TransitionNodes = {
-  guard?: R3Node,
-  reducer?: R3Node,
-}
 
 export function createDag(machine: R3Machine): R3Dag {
   const nodeMap: NodeMap = mapRecord(
     machine.states,
     collectStateNodes
   )
-
-  console.warn('nodeMap', inspect(nodeMap, { depth: 8 }))
 
   const nodes: R3Node[] = Object.values(nodeMap).reduce(
     (acc, item) => {
@@ -162,79 +146,6 @@ function collectTransitionEdges(from: R3NodeID, to: R3NodeID, transition: Transi
   return candidates.filter<R3Edge>((e): e is R3Edge => !!e)
 }
 
-// function collectImmediateEdges(machine: R3Machine, nodes: NodeMap, state: string, immediateIndex: number) {
-//   const definition = machine.states[state].immediates?.[immediateIndex]
-//   if (!definition) {
-//     return []
-//   }
-//
-//   const immediate: TransitionNodes = nodes[state].immediatesNodes[immediateIndex]
-//
-//   const fromSource: R3Edge = {
-//     from: getStateId(nodes, state),
-//     to: immediate.guard?.id || immediate.reducer?.id || getStateId(nodes, definition.to),
-//     kind: 'immediate'
-//   }
-//
-//   const fromGuard: R3Edge | undefined = immediate.guard && {
-//     from: immediate.guard.id,
-//     to: immediate.reducer?.id || getStateId(nodes, definition.to),
-//     kind: 'immediate'
-//   }
-//
-//   const fromReducer: R3Edge | undefined = immediate.reducer && {
-//     from: immediate.reducer.id,
-//     to: getStateId(nodes, definition.to),
-//     kind: 'immediate'
-//   }
-//
-//   const candidates = [
-//     fromSource,
-//     fromGuard,
-//     fromReducer
-//   ]
-//
-//   return candidates.filter<R3Edge>((e): e is R3Edge => !!e)
-// }
-
-
 function getStateId(nodeMap: NodeMap, state: string): R3NodeID {
   return nodeMap[state].root.id
 }
-
-
-function mapRecord<T, U>(record: Record<string, T>, fn: (t: T, s: string) => U): Record<string, U> {
-  return Object.entries(record).reduce(
-    (result, [inputKey, inputVal]) => {
-      return {
-        ...result,
-        [inputKey]: fn(inputVal, inputKey)
-      }
-    },
-    {} as Record<string, U>
-  )
-}
-
-
-// To build our tree we'll construct an object tree
-// Each object has a dict of edges
-// Edges are named
-
-// Each transition will be
-// --> |event| --> guard --> |truthy| --> reducer? --> destination
-//                       --> |falsy|  --> (nextTransition for this event)
-// --> |event| --> reducer? --> destination
-
-// Each immediate will be
-// -->guard? --> |truthy| --> reducer? --> destination
-//           --> |falsy|  --> (nextGuard || backToSelf)
-
-// Each promise will be
-// --> |done| --> map transition
-// --> |error| --> map transition
-// --> |x| --> map transition
-
-// Each invoked machine will be
-// --> |done| --> map transition
-// --> |error| --> map transition
-// --> delegate: subMachine
