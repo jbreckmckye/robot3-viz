@@ -1,7 +1,7 @@
-type FnNamed <T> = Function & { name: T }
+type FnNamed<T> = Function & { name: T }
 
-type ReducerFn = FnNamed<undefined> | FnNamed<'identity'>
-type GuardFn = FnNamed<undefined> | FnNamed<'truthy'>
+type ReducerFn = Function | FnNamed<'identity'>
+type GuardFn = Function | FnNamed<'truthy'>
 
 export type R3Machine = {
   current: string,

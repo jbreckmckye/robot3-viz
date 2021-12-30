@@ -10,7 +10,15 @@ import {
   transitions
 } from './machines/features';
 
+/**
+ * You can use these tests as a convenience for inspecting the data structures Robot3 returns
+ * Just comment out the one you want
+ */
 describe("Print the contents of various Robot3 machines to the console", () => {
+  test('Required test', () => {
+    expect(true).toBe(true)
+  })
+
   // test("Machine: transitions", () => {
   //   console.warn(inspect(transitions, { depth: 8 }))
   //   expect(1).toBe(1)
