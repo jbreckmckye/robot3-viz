@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "git@github.com:jbreckmckye/robot3-viz.git",
   "author": "jbreckmckye",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "scripts": {
     "test": "jest ."
   },

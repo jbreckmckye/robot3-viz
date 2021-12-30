@@ -2,6 +2,8 @@
 
 Work in progress
 
-🎨 Visualise [Robot3](https://thisrobot.life/) finite state machines.
-👀 See a flowchart representation of your state
-🖼 Generate SVGs from your state machine code
+- 🎨 Visualise [Robot3](https://thisrobot.life/) finite state machines.
+- 👀 See a flowchart representation of your state
+- 🖼 Generate SVGs from your state machine code
+
+Copyright (C) 2021 Jimmy Breck-McKye
