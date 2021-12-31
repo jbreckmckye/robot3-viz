@@ -22,6 +22,7 @@ export function getDagre(dag: R3Dag) {
       edge.to.toString(10),
       {
         label: edge.label ? edge.label : undefined,
+        curve: d3.curveBasis,
         class: 'edge--' + edge.kind
       }
     )

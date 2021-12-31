@@ -8,15 +8,18 @@
   "license": "AGPL-3.0",
   "scripts": {
     "test": "jest .",
-    "demo": "parcel example/index.html"
+    "build": "tsc",
+    "test-manual": "parcel test/example/index.html --dist-dir tmp"
   },
   "devDependencies": {
     "@types/d3": "^7.1.0",
     "@types/jest": "^27.0.3",
-    "@types/jsdom": "^16.2.14",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "jest": "^27.4.5",
-    "jsdom": "^19.0.0",
     "parcel": "^2.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "robot3": "^0.2.21",
     "ts-jest": "^27.1.2",
     "typescript": "^4.5.4"
@@ -24,5 +27,13 @@
   "dependencies": {
     "d3": "^7.2.1",
     "dagre-d3": "0.6.4"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   }
 }

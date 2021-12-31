@@ -2,9 +2,17 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2020",
+    "esModuleInterop": true,
     "sourceMap": true,
-    "strict": true
+    "declaration": true,
+    "declarationMap": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "outDir": "dist",
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
     "node_modules"
   ]

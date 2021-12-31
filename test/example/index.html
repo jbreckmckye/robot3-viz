@@ -5,6 +5,10 @@
     <title>Title</title>
 
     <style type="text/css">
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
         text {
             font-weight: 300;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -25,18 +29,7 @@
 
 </head>
 <body>
-    <h2>Transitions</h2>
-    <svg id="transitions" width="1024" height="640"></svg>
-
-    <h2>Guards</h2>
-    <svg id="guards" width="1024" height="640"></svg>
-
-    <h2>Reducers</h2>
-    <svg id="reducers" width="1024" height="640"></svg>
-
-    <h2>Immediates</h2>
-    <svg id="immediates" width="1024" height="640"></svg>
-
-    <script type="module" src="app.ts"></script>
+    <div id="app"></div>
+    <script type="module" src="app.tsx"></script>
 </body>
 </html>
