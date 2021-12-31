@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        text {
+            font-weight: 300;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .node rect {
+            stroke: #999;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .edgePath path {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Transitions</h2>
+    <svg id="transitions" width="1024" height="640"></svg>
+
+    <h2>Guards</h2>
+    <svg id="guards" width="1024" height="640"></svg>
+
+    <h2>Reducers</h2>
+    <svg id="reducers" width="1024" height="640"></svg>
+
+    <h2>Immediates</h2>
+    <svg id="immediates" width="1024" height="640"></svg>
+
+    <script type="module" src="app.ts"></script>
+</body>
+</html>

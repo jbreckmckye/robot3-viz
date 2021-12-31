@@ -8,8 +8,8 @@ export {
   getDagre
 }
 
-export function robot3viz (input: Machine, doc: Document = global.document) {
+export function robot3viz (input: Machine, svg: SVGElement) {
   const dag = getDAG(input)
   const dagre = getDagre(dag)
-  return renderSVG(dagre, doc).node() as unknown as SVGElement
+  return renderSVG(dagre, svg).node() as unknown as SVGElement
 }

@@ -20,21 +20,25 @@ export function getDagre(dag: R3Dag) {
     graph.setEdge(
       edge.from.toString(10),
       edge.to.toString(10),
-      edge.label
+      {
+        label: edge.label ? edge.label : undefined,
+        class: 'edge--' + edge.kind
+      }
     )
   }
 
   return graph
 }
 
-export function renderSVG(graph: graphlib.Graph, doc: Document = global.document) {
+export function renderSVG(graph: graphlib.Graph, root: SVGElement) {
   const render = new dagre.render()
 
   // Create root SVG
-  const svg = d3.select(document.createElement('svg'))
+  const svg = d3.select(root)
+  svg.append('g')
 
   // Run the renderer. This is what draws the graph
-  render(svg as any, graph as any)
+  render(svg.select('g') as any, graph as any)
 
   const graphHeight = (graph as any)?.graph()?.height
   const graphWidth = (svg.node())?.getBoundingClientRect()?.width
