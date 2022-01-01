@@ -105,7 +105,7 @@ describe('getDAG', () => {
       })
       hasNode({
         kind: 'guard',
-        label: 'guardFn'
+        label: 'guard'
       })
       hasNode({
         kind: 'state',
@@ -121,7 +121,7 @@ describe('getDAG', () => {
       })
       hasNode({
         kind: 'guard',
-        label: 'guardFn'
+        label: 'guard'
       })
       hasNode({
         kind: 'state',
@@ -217,7 +217,7 @@ describe('getNodesForTransition', () => {
       expect.objectContaining({
         reducer: {
           kind: 'reduce',
-          label: 'reducerFn',
+          label: 'reducer',
           id: expect.any(Number)
         }
       })

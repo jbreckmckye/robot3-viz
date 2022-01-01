@@ -108,8 +108,8 @@ export function getNodesForTransition(transition: R3Transition | R3Immediate): T
   const hasReducer = reducers && reducers.name !== 'identity'
 
   return {
-    guard: hasGuard ? Guard('guardFn') : undefined,
-    reducer: hasReducer ? Reducer('reducerFn') : undefined
+    guard: hasGuard ? Guard('guard') : undefined,
+    reducer: hasReducer ? Reducer('reducer') : undefined
   }
 }
 

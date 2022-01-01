@@ -1,18 +1,28 @@
 import * as d3 from 'd3'
-import * as dagre from 'dagre-d3'
+import * as dagre from 'dagre'
+import * as dagreD3 from 'dagre-d3'
 import { graphlib } from 'dagre-d3'
 
 import { R3Dag } from './types/dag'
 
-export function getDagre(dag: R3Dag) {
+export function getDagre(dag: R3Dag, options: dagre.GraphLabel = {}) {
+  const defaultOptions = {
+    marginx: 20,
+    marginy: 20,
+    nodesep: 40,
+    edgesep: 40,
+    ranksep: 40,
+    labelpos: 'c'
+  } as dagre.GraphLabel
+
   const graph = new graphlib.Graph()
-    .setGraph({})
+    .setGraph({ ...defaultOptions, ...options })
     .setDefaultEdgeLabel(() => ({}))
 
   for (const node of dag.nodes) {
     graph.setNode(node.id.toString(10), {
       label: node.label,
-      class: node.kind
+      class: 'node--' + node.kind
     })
   }
 
@@ -32,7 +42,7 @@ export function getDagre(dag: R3Dag) {
 }
 
 export function renderSVG(graph: graphlib.Graph, root: SVGElement) {
-  const render = new dagre.render()
+  const render = new dagreD3.render()
 
   // Create root SVG
   const svg = d3.select(root)
@@ -50,6 +60,18 @@ export function renderSVG(graph: graphlib.Graph, root: SVGElement) {
 
   if (graphWidth) {
     svg.attr('width', graphWidth)
+  }
+
+  // Append edge label backgrounds
+  const edgeLabels = svg.node()!.querySelectorAll('.edgeLabel .label')
+  for (const label of edgeLabels) {
+    const { width, height } = label.getBoundingClientRect()
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
+    rect.setAttribute('class', 'edge--labelBackground')
+    rect.setAttribute('width', width.toString(10))
+    rect.setAttribute('height', height.toString(10))
+    rect.setAttribute('fill', 'white')
+    label.prepend(rect)
   }
 
   return svg
