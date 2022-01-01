@@ -62,17 +62,84 @@ export function renderSVG(graph: graphlib.Graph, root: SVGElement) {
     svg.attr('width', graphWidth)
   }
 
+  styleSVG(svg.node()!)
+
+  return svg
+}
+
+function styleSVG (svg: SVGElement) {
   // Append edge label backgrounds
-  const edgeLabels = svg.node()!.querySelectorAll('.edgeLabel .label')
+  const edgeLabels = svg.querySelectorAll('.edgeLabel .label')
   for (const label of edgeLabels) {
     const { width, height } = label.getBoundingClientRect()
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
-    rect.setAttribute('class', 'edge--labelBackground')
-    rect.setAttribute('width', width.toString(10))
-    rect.setAttribute('height', height.toString(10))
-    rect.setAttribute('fill', 'white')
+    setAttrs(rect, {
+      class: 'edge--labelBkg',
+      width: width.toString(),
+      height: height.toString(),
+      fill: 'white'
+    })
+
     label.prepend(rect)
   }
 
-  return svg
+  // Text
+  setAttrs(
+    svg.querySelectorAll('text'),
+    {
+      'font-weight': '300',
+      'font-family': '"Helvetica Neue", Helvetica, Arial, sans-serif',
+      'font-size': '16px'
+    }
+  )
+
+  setAttrs(
+    svg.querySelectorAll('rect'),
+    {
+      fill: '#fff'
+    }
+  )
+
+  setAttrs(
+    svg.querySelectorAll('.node--state rect'),
+    {
+      stroke: '#333',
+      'border-radius': '50%',
+      'stroke-width': '2px'
+    }
+  )
+
+  setAttrs(
+    [
+      ...svg.querySelectorAll('.node--guard text'),
+      ...svg.querySelectorAll('.node--reduce text')
+    ],
+    {
+      'font-style': 'italic'
+    }
+  )
+
+  setAttrs(
+    svg.querySelectorAll('.edgePath path'),
+    {
+      stroke: '#333',
+      'stroke-width': '2px'
+    }
+  )
+
+}
+
+function setAttrs(els: SVGElement | NodeListOf<SVGElement> | Element[], attrs: Record<string, string>) {
+  const elements =
+    els instanceof NodeList ? Array.from(els) :
+    Array.isArray(els) ? els :
+    [els]
+
+  const entries = Object.entries(attrs)
+
+  for (const element of elements) {
+    for (const [key, value] of entries) {
+      element.setAttribute(key, value)
+    }
+  }
 }
