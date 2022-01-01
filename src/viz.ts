@@ -83,12 +83,11 @@ function styleSVG (svg: SVGElement) {
     label.prepend(rect)
   }
 
-  // Text
   setAttrs(
-    svg.querySelectorAll('text'),
+    svg,
     {
       'font-weight': '300',
-      'font-family': '"Helvetica Neue", Helvetica, Arial, sans-serif',
+      'font-family': '"Helvetica Neue", Helvetica, HelveticaNeue, Arial, sans-serif',
       'font-size': '16px'
     }
   )
