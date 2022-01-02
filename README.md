@@ -1,12 +1,10 @@
 # robot3-viz
 
-- 🎨 Visualise [Robot3](https://thisrobot.life/) finite state machines
-- 👀 See a flowchart representation of your state
-- 🖼 Generate SVGs from your state machine code
+- 🎨 Visualise [Robot3](https://thisrobot.life/) finite state machines as SVGs
 - ⚛ React component included
+- ✅ Supports custom styling and renderer
 - 💡 Uses [Dagre](https://github.com/dagrejs/dagre) and
   [D3](https://d3js.org/) under the hood
-- 🌍 Provided on a AGPL-3.0 license
 
 You can use this library to create in-browser visualisations of the state 
 machines that power your JavaScript apps.
