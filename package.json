@@ -2,7 +2,7 @@
   "name": "robot3-viz",
   "version": "1.0.0",
   "description": "Visualise Robot3 finite state machines",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "git@github.com:jbreckmckye/robot3-viz.git",
   "author": "jbreckmckye",
   "license": "AGPL-3.0",
