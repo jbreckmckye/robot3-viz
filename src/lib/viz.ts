@@ -3,7 +3,7 @@ import * as dagre from 'dagre'
 import * as dagreD3 from 'dagre-d3'
 import { graphlib } from 'dagre-d3'
 
-import { R3Dag } from './types/dag'
+import { R3Dag } from '../types/dag'
 
 export function getDagre(dag: R3Dag, options: dagre.GraphLabel = {}) {
   const defaultOptions = {
@@ -68,6 +68,8 @@ export function renderSVG(graph: graphlib.Graph, root: SVGElement) {
 }
 
 function styleSVG (svg: SVGElement) {
+  svg.classList.add('robot3-viz')
+
   // Append edge label backgrounds
   const edgeLabels = svg.querySelectorAll('.edgeLabel .label')
   for (const label of edgeLabels) {

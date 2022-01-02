@@ -1,10 +1,12 @@
 import React, { CSSProperties, useEffect, useRef } from 'react'
+import * as dagre from 'dagre'
 import { Machine } from 'robot3'
 
-import { robot3viz } from '../index'
+import { robot3viz } from '../lib'
 
 type Props = {
   style?: CSSProperties,
+  options?: dagre.GraphLabel,
   fsm: Machine
 }
 
@@ -29,7 +31,6 @@ export function Robot3Viz(props: Props) {
   return (
     <svg
       ref={svg}
-      className='robot3viz'
       style={{
         ...svgStyle,
         ...props.style

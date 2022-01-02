@@ -1,6 +1,4 @@
-import { inspect } from 'util'
-
-import { getDAG, getNodesForTransition } from '../src/dag'
+import { getDAG, getNodesForTransition } from '../src/lib/dag'
 
 import {
   actioned,
@@ -201,7 +199,7 @@ describe('getNodesForTransition', () => {
       expect.objectContaining({
         guard: {
           kind: 'guard',
-          label: 'guardFn',
+          label: 'guard',
           id: expect.any(Number)
         }
       })

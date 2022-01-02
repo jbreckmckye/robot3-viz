@@ -1,9 +1,9 @@
 import type { Machine } from 'robot3'
 
-import { R3Immediate, R3Machine, R3State, R3Transition } from './types/robot3'
-import { NodeMap, R3Dag, R3Edge, R3EdgeKinds, R3Node, R3NodeID, StateNodes, TransitionNodes } from './types/dag'
+import { R3Immediate, R3Machine, R3State, R3Transition } from '../types/robot3'
+import { NodeMap, R3Dag, R3Edge, R3EdgeKinds, R3Node, R3NodeID, StateNodes, TransitionNodes } from '../types/dag'
 import { Guard, Reducer, State } from './nodes'
-import { mapRecord } from './util'
+import { mapRecord } from '../util'
 
 /**
  * For a given Robot3 machine, return an R3Dag structure for consumption by a visualisation library

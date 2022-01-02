@@ -1,4 +1,4 @@
-import { R3Node, R3NodeID } from './types/dag';
+import { R3Node, R3NodeID } from '../types/dag';
 
 function ID() {
   const self = ID as unknown as { x: number }
