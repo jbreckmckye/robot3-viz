@@ -1,6 +1,6 @@
 {
   "name": "robot3-viz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Visualise Robot3 finite state machines",
   "main": "dist/index.js",
   "repository": "git@github.com:jbreckmckye/robot3-viz.git",

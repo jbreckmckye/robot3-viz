@@ -41,6 +41,12 @@ export function getDagre(dag: R3Dag, options: dagre.GraphLabel = {}) {
   return graph
 }
 
+export function clearSVG(root: SVGElement) {
+  for (const child of root.childNodes) {
+    root.removeChild(child)
+  }
+}
+
 export function renderSVG(graph: graphlib.Graph, root: SVGElement) {
   const render = new dagreD3.render()
 

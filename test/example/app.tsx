@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import * as machines from '../machines/features'
@@ -23,6 +23,23 @@ function App() {
 
       <h2>Loading data (with promises)</h2>
       <Robot3Viz fsm={machines.invokePromises} />
+
+      <h2>Example to support re-rendering</h2>
+      <DynamicRender />
+    </>
+  )
+}
+
+function DynamicRender() {
+  const [ whichFSM, toggleFSM ] = useState(true)
+  const dynamicFSM = whichFSM ? machines.transitions : machines.guards
+
+  return (
+    <>
+      <button onClick={() => toggleFSM(!whichFSM)}>
+        SWITCH FSM
+      </button>
+      <Robot3Viz fsm={dynamicFSM} />
     </>
   )
 }

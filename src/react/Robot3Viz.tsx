@@ -26,7 +26,7 @@ export function Robot3Viz(props: Props) {
 
     robot3viz(props.fsm, svg.current)
 
-  }, [svg.current])
+  }, [svg.current, props.fsm])
 
   return (
     <svg
