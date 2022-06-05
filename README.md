@@ -240,6 +240,6 @@ export const invokePromises = createMachine({
 
 ## Licenses etc.
 
-Provided with a GNU Affero General Public License (AGPL 3.0). No warranty.
+Provided with a BSD license, see LICENSE file.
 
 Copyright (C) 2021 Jimmy Breck-McKye

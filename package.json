@@ -1,11 +1,11 @@
 {
   "name": "robot3-viz",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Visualise Robot3 finite state machines",
   "main": "dist/index.js",
   "repository": "git@github.com:jbreckmckye/robot3-viz.git",
   "author": "jbreckmckye",
-  "license": "AGPL-3.0",
+  "license": "BSD-2-Clause",
   "scripts": {
     "test": "jest .",
     "build": "tsc",
